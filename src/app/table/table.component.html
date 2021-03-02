@@ -1,1 +1,53 @@
-<p>table works!</p>
+<div class="form-group">
+  <input type="text" name="inputLine" placeholder="Input anything" [(ngModel)]="inputLine">
+  <button type="button" class="btn btn-info" (click)="sendInputLine()">Search</button>
+</div>
+<!--<form [formGroup]="">-->
+<!--  <div type="text" id="id" formControlName="id"></div>-->
+<!--  <div type="text" id="value" formControlName="value"></div>-->
+<!--  <table>-->
+<!--    <thead>-->
+<!--    <tr>-->
+<!--      <td *ngFor="let id" formControlName="id">id</td>-->
+<!--      <td *ngFor="let value" formControlName="value">value</td>-->
+<!--    </tr>-->
+<!--    </thead>-->
+<!--  </table>-->
+<!--</form>-->
+
+<!--<div>-->
+<!--{{formGroup.value | json}}-->
+<!--</div>-->
+
+
+<!--<table class="table table-striped table-dark">-->
+<!--  <thead>-->
+<!--  <tr>-->
+<!--    <th scope="col">id</th>-->
+<!--    <th scope="col">value</th>-->
+<!--  </tr>-->
+<!--  </thead>-->
+<!--  <tbody>-->
+<!--  <tr *ngFor="let dataFromServer of dataFromServer">-->
+<!--    <td>{{dataFromServer.id}}</td>-->
+<!--    <td>{{dataFromServer.value}}</td>-->
+<!--  </tr>-->
+<!--  </tbody>-->
+<!--</table>-->
+
+
+<table class="table table-bordered table-dark">
+  <thead>
+  <tr>
+    <th scope="col">id</th>
+    <th scope="col">value</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let dataFromServer of dataFromServer">
+    <td>{{dataFromServer.id}}</td>
+    <td>{{dataFromServer.value}}</td>
+  </tr>
+  </tbody>
+</table>
+

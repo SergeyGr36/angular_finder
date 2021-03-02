@@ -1,0 +1,12 @@
+.table-dark td, .table-dark thead th{
+  border-color: darkgray;
+}
+th{
+  text-align: center;
+  font-size: xx-large;
+  font-family: "Bitstream Charter";
+}
+td{
+  display: table-cell;
+  text-align: center;
+}
