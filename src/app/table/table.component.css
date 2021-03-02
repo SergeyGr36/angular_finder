@@ -1,5 +1,9 @@
-.table-dark td, .table-dark thead th{
-  border-color: darkgray;
+.table-dark{
+  background-color: black;
+}
+.btn-danger{
+  background-color: unset;
+  color: red;
 }
 th{
   text-align: center;
@@ -9,4 +13,18 @@ th{
 td{
   display: table-cell;
   text-align: center;
+}
+.btn{
+  color: aqua;
+}
+button{
+  background-color: cadetblue;
+}
+#deleteRef{
+  color: blue;
+  background-color: crimson;
+}
+#saveRef{
+  background-color: green;
+  color: aquamarine;
 }

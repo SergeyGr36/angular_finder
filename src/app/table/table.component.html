@@ -2,6 +2,10 @@
   <input type="text" name="inputLine" placeholder="Input anything" [(ngModel)]="inputLine">
   <button type="button" class="btn btn-info" (click)="sendInputLine()">Search</button>
 </div>
+
+<!--*****************************************************************************-->
+<!--                  version2-->
+
 <!--<form [formGroup]="">-->
 <!--  <div type="text" id="id" formControlName="id"></div>-->
 <!--  <div type="text" id="value" formControlName="value"></div>-->
@@ -20,34 +24,91 @@
 <!--</div>-->
 
 
-<!--<table class="table table-striped table-dark">-->
-<!--  <thead>-->
-<!--  <tr>-->
-<!--    <th scope="col">id</th>-->
-<!--    <th scope="col">value</th>-->
+<!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
+<!--                  version3-->
+
+<!--<table class="table table-bordered table-dark" cdk-table [dataSource]="dataFromServer">-->
+<!--  <ng-container cdkColumnDef="id">-->
+<!--    <th cdk-header-cell *cdkHeaderCellDef> ID </th>-->
+<!--    <td cdk-cell *cdkCellDef="let dataFromServer">{{dataFromServer.id}}</td>-->
+<!--  </ng-container>-->
+<!--  <ng-container cdkColumnDef="value">-->
+<!--    <th cdk-header-cell *cdkHeaderCellDef> Value </th>-->
+<!--    <td cdk-cell *cdkCellDef="let dataFromServer">{{dataFromServer.value}}</td>-->
+<!--  </ng-container>-->
+<!--  <tr cdk-header-row *cdkHeaderRowDef="['id', 'value']"></tr>-->
+<!--  <tr cdk-row *cdkRowDef="let rowFromTable; columns: ['id', 'value']" (click)="deletePosition(rowFromTable)">-->
 <!--  </tr>-->
-<!--  </thead>-->
-<!--  <tbody>-->
-<!--  <tr *ngFor="let dataFromServer of dataFromServer">-->
-<!--    <td>{{dataFromServer.id}}</td>-->
-<!--    <td>{{dataFromServer.value}}</td>-->
-<!--  </tr>-->
-<!--  </tbody>-->
 <!--</table>-->
 
 
-<table class="table table-bordered table-dark">
-  <thead>
-  <tr>
-    <th scope="col">id</th>
-    <th scope="col">value</th>
-  </tr>
-  </thead>
-  <tbody>
-  <tr *ngFor="let dataFromServer of dataFromServer">
-    <td>{{dataFromServer.id}}</td>
-    <td>{{dataFromServer.value}}</td>
-  </tr>
-  </tbody>
-</table>
+<!--****************************************************************************-->
+<!--                        version4-->
 
+<!--<table class="table table-bordered table-dark">-->
+<!--  <thead>-->
+<!--  <th>ID</th>-->
+<!--  <th>value</th>-->
+<!--  </thead>-->
+<!--  <tr *ngFor="let row of dataFromServer; index as i;" class="hover-highlight">-->
+<!--    <td class="benchmark_name">-->
+<!--      {{row.id}}-->
+<!--    </td>-->
+<!--    <td>-->
+<!--      {{row.value}}-->
+<!--    </td>-->
+<!--    <td>-->
+<!--      <button *ngIf="enableEdit && enableEditIndex == i" (click)="enableEdit=false">Cancel</button>-->
+<!--      <button *ngIf="enableEdit && enableEditIndex == i" (click)="deletePosition($event, row)" type="submit">Accept</button>-->
+<!--      <a [routerLink]="" class="table-row-action edit-action" *ngIf="!enableEdit" (click)="enableEditMethod($event, i)">-->
+<!--        delete-->
+<!--      </a>-->
+<!--      <a [routerLink]="" class="table-row-action edit-action" *ngIf="!enableEdit" (click)="enableEditMethod($event, i)">-->
+<!--        edit-->
+<!--      </a>-->
+<!--  </tr>-->
+<!--</table>-->
+
+
+<!--***********************************************************************************-->
+<!--                                    version5-->
+
+
+<!-- Editable table -->
+<div class="card">
+  <h3 class="card-header text-center font-weight-bold text-uppercase py-4">Month and other data for search</h3>
+  <div class="card-body">
+    <div id="table" class="table-editable">
+      <!--      <span class="table-add float-right mb-3 mr-2">-->
+      <!--        <a class="text-success" (click)="add()">-->
+      <!--          <mdb-icon fas icon="plus" size="2x"></mdb-icon>-->
+      <!--        </a>-->
+      <!--      </span>-->
+      <table class="table table-bordered table-responsive-md table-striped text-center">
+        <tr>
+          <th class="text-center">ID</th>
+          <th class="text-center">Value</th>
+        </tr>
+        <tr *ngFor="let rowFromTable of dataFromServer; let id = index">
+          <th>{{rowFromTable.id}}</th>
+          <th>{{rowFromTable.value}}</th>
+          <td>
+            <span class="table-remove">
+              <button *ngIf="enableDel && enableDelIndex == id" (click)="deletePosition($event, rowFromTable)">Submit</button>
+              <button *ngIf="enableDel && enableDelIndex == id" (click)="enableDel=false">Cancel</button>
+              <button type="button" rounded="true" size="sm" class="my-0" class="table-row-action edit-action"
+                      *ngIf="!enableDel" (click)="enableDelMethod($event, id)">Remove</button>
+            </span>
+          </td>
+          <td>
+            <span class="table-edit">
+              <button type="button" mdbBtn color="danger" rounded="true" size="sm" class="my-0"
+                      (click)="deletePosition($event, rowFromTable)">Edit</button>
+            </span>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>
+<!-- Editable table -->

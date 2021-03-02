@@ -8,6 +8,8 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {HttpClientModule} from '@angular/common/http';
 import {RouterModule, Routes} from "@angular/router";
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {MatTableModule} from "@angular/material/table";
+import {CdkTableModule} from "@angular/cdk/table";
 
 const routes: Routes = [
   {path: 'find', component: TableComponent}
@@ -25,6 +27,8 @@ const routes: Routes = [
     HttpClientModule,
     BrowserAnimationsModule,
     ReactiveFormsModule,
+    MatTableModule,
+    CdkTableModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
