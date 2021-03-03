@@ -1,8 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {ConfigService} from "../config.service";
 import {DataFromServer} from "../data.from.server";
-import {strict} from "assert";
-import {$} from "protractor";
 
 @Component({
   selector: 'app-table',
@@ -18,6 +16,7 @@ export class TableComponent implements OnInit {
 
   value: string;
   inputLine: string;
+  tempEditValue: string;
   rowFromTable: DataFromServer;
 
   constructor(private configService: ConfigService) {
@@ -26,7 +25,7 @@ export class TableComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  sendInputLine() {
+  getDataBySearch() {
     this.configService.getData(this.inputLine).subscribe((data: DataFromServer[]) => {
       this.dataFromServer = data;
     });
@@ -36,11 +35,12 @@ export class TableComponent implements OnInit {
     // @ts-ignore
     this.configService.deleteData(rowFromTable).subscribe();
     this.getCurrentDataAfterActions();
+    this.enableDel=false;
 
   }
 
   getCurrentDataAfterActions() {
-    this.sendInputLine();
+    this.getDataBySearch();
   }
 
   enableEditMethod(e, i) {
@@ -54,11 +54,14 @@ export class TableComponent implements OnInit {
     createNewPosition(input:string){
     this.configService.createData(input)
   }
-
-  changeValue(id: number, value : string, e) {
+  tempValueForEdit(id: number, property: string, event: any){
+    this.tempEditValue=event.target.textContent;
+}
+  editValue(id: number, value : string, e:any) {
     this.rowFromTable = new DataFromServer()
     this.rowFromTable.id=id;
     this.rowFromTable.value=value;
-    this.configService.updateData(this.rowFromTable);
+    this.configService.updateData(this.rowFromTable).subscribe();
+    this.enableEdit=false;
   }
 }

@@ -1,6 +1,6 @@
 <div class="form-group">
   <input type="text" name="inputLine" placeholder="Input anything" [(ngModel)]="inputLine">
-  <button type="button" class="btn btn-info" (click)="sendInputLine()">Search</button>
+  <button type="button" class="btn btn-info" (click)="getDataBySearch()">Search</button>
 </div>
 
 <!--*****************************************************************************-->
@@ -88,13 +88,18 @@
         <tr>
           <th class="text-center">ID</th>
           <th class="text-center">Value</th>
+          <th>
+            <div class="form-group">
+              <button type="button" class="btn btn-info" (click)="createNewPosition(inputLine)">Create</button>
+            </div>
+          </th>
         </tr>
         <tr *ngFor="let rowFromTable of dataFromServer; let id = index">
           <th>
             {{rowFromTable.id}}
           </th>
           <th class="allowEdit">
-            <span [attr.contenteditable]="enableEdit">{{rowFromTable.value}}</span>
+            <span [attr.contenteditable]="enableEdit" (keyup)="tempValueForEdit(id, value, $event)">{{rowFromTable.value}}</span>
           </th>
             <span class="table-remove" *ngIf="!enableEdit">
               <button *ngIf="enableDel && enableDelIndex == id" (click)="deletePosition($event, rowFromTable)">Submit</button>
@@ -103,7 +108,7 @@
                       *ngIf="!enableDel" (click)="enableDelMethod($event, id)">Remove</button>
             </span>
             <span class="table-edit" *ngIf="!enableDel">
-              <button class="btn btn-primary btn-sm" *ngIf="enableEdit && enableEditIndex == id" (click)="changeValue(rowFromTable.id, value, $event)">Submit</button>
+              <button class="btn btn-primary btn-sm" *ngIf="enableEdit && enableEditIndex == id" (click)="editValue(rowFromTable.id, tempEditValue, $event)">Submit</button>
               <button class="btn btn-secondary btn-sm" *ngIf="enableEdit && enableEditIndex == id" (click)="enableEdit=false">Cancel</button>
               <button type="button" mdbBtn color="danger" rounded="true" size="sm" class="my-0"
                       *ngIf="!enableEdit" (click)="enableEditMethod($event, id)">Edit</button>

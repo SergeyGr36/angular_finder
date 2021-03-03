@@ -6,7 +6,6 @@ import {DataFromServer} from "./data.from.server";
 @Injectable({providedIn: 'root'})
 export class ConfigService {
   private url: string = 'http://localhost:8080/api/finder';
-dataFromServer: DataFromServer;
   constructor(private http: HttpClient) {
   }
 
@@ -25,7 +24,7 @@ dataFromServer: DataFromServer;
   createData(input: string): Observable<DataFromServer>{
     return this.http.post<DataFromServer>(this.url+"/create", input);
   }
-  updateData(value: DataFromServer){
-    this.http.put(this.url+"/edit", value)
+  updateData(value: DataFromServer): Observable<any>{
+    return this.http.put(this.url+"/edit", value)
   }
 }
