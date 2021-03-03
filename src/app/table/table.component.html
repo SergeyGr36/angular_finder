@@ -90,22 +90,24 @@
           <th class="text-center">Value</th>
         </tr>
         <tr *ngFor="let rowFromTable of dataFromServer; let id = index">
-          <th>{{rowFromTable.id}}</th>
-          <th>{{rowFromTable.value}}</th>
-          <td>
-            <span class="table-remove">
+          <th>
+            {{rowFromTable.id}}
+          </th>
+          <th class="allowEdit">
+            <span [attr.contenteditable]="enableEdit">{{rowFromTable.value}}</span>
+          </th>
+            <span class="table-remove" *ngIf="!enableEdit">
               <button *ngIf="enableDel && enableDelIndex == id" (click)="deletePosition($event, rowFromTable)">Submit</button>
               <button *ngIf="enableDel && enableDelIndex == id" (click)="enableDel=false">Cancel</button>
               <button type="button" rounded="true" size="sm" class="my-0" class="table-row-action edit-action"
                       *ngIf="!enableDel" (click)="enableDelMethod($event, id)">Remove</button>
             </span>
-          </td>
-          <td>
-            <span class="table-edit">
+            <span class="table-edit" *ngIf="!enableDel">
+              <button class="btn btn-primary btn-sm" *ngIf="enableEdit && enableEditIndex == id" (click)="changeValue(rowFromTable.id, value, $event)">Submit</button>
+              <button class="btn btn-secondary btn-sm" *ngIf="enableEdit && enableEditIndex == id" (click)="enableEdit=false">Cancel</button>
               <button type="button" mdbBtn color="danger" rounded="true" size="sm" class="my-0"
-                      (click)="deletePosition($event, rowFromTable)">Edit</button>
+                      *ngIf="!enableEdit" (click)="enableEditMethod($event, id)">Edit</button>
             </span>
-          </td>
         </tr>
       </table>
     </div>

@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {ConfigService} from "../config.service";
 import {DataFromServer} from "../data.from.server";
 import {strict} from "assert";
+import {$} from "protractor";
 
 @Component({
   selector: 'app-table',
@@ -10,11 +11,11 @@ import {strict} from "assert";
 })
 export class TableComponent implements OnInit {
   dataFromServer: DataFromServer[] = [];
-  // enableEdit = false;
-  // enableEditIndex = null;
+  enableEdit = false;
   enableDel = false;
+  enableEditIndex = null;
   enableDelIndex = null;
-  id: number;
+
   value: string;
   inputLine: string;
   rowFromTable: DataFromServer;
@@ -42,11 +43,22 @@ export class TableComponent implements OnInit {
     this.sendInputLine();
   }
 
+  enableEditMethod(e, i) {
+    this.enableEdit = true;
+    this.enableEditIndex = i;
+  }
   enableDelMethod(e, i) {
     this.enableDel = true;
     this.enableDelIndex = i;
   }
     createNewPosition(input:string){
     this.configService.createData(input)
+  }
+
+  changeValue(id: number, value : string, e) {
+    this.rowFromTable = new DataFromServer()
+    this.rowFromTable.id=id;
+    this.rowFromTable.value=value;
+    this.configService.updateData(this.rowFromTable);
   }
 }
