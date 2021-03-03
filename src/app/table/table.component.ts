@@ -1,4 +1,4 @@
-import {Component, Renderer2,OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ConfigService} from "../config.service";
 import {DataFromServer} from "../data.from.server";
 
@@ -21,7 +21,7 @@ export class TableComponent implements OnInit {
   rowFromTable: DataFromServer;
   createLineRecord: string;
 
-  constructor(private configService: ConfigService, public renderer: Renderer2) {
+  constructor(private configService: ConfigService) {
   }
 
   ngOnInit(): void {
@@ -73,7 +73,7 @@ export class TableComponent implements OnInit {
     this.enableEdit = true;
     this.enableEditIndex = i;
   }
-  enableDelMethod(e, i) {
+  enableDelMethod(i) {
     this.enableDel = true;
     this.enableDelIndex = i;
   }

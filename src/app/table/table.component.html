@@ -96,13 +96,13 @@
             {{rowFromTable.id}}
           </th>
           <th class="allowEdit">
-            <span [attr.contenteditable]="enableEdit" (keyup)="tempValueForEdit(id, value, $event)">{{rowFromTable.value}}</span>
+            <span [attr.contenteditable]="enableEdit&&enableEditIndex==id" (keyup)="tempValueForEdit(id, value, $event)">{{rowFromTable.value}}</span>
           </th>
             <span class="table-remove" *ngIf="!enableEdit">
               <button *ngIf="enableDel && enableDelIndex == id" (click)="deletePosition($event, rowFromTable)">Submit</button>
               <button *ngIf="enableDel && enableDelIndex == id" (click)="enableDel=false">Cancel</button>
               <button type="button" rounded="true" size="sm" class="my-0"
-                      *ngIf="!enableDel" (click)="enableDelMethod($event, id)">Remove</button>
+                      *ngIf="!enableDel" (click)="enableDelMethod(id)">Remove</button>
             </span>
             <span class="table-edit" *ngIf="!enableDel">
               <button class="btn btn-primary btn-sm" *ngIf="enableEdit && enableEditIndex == id" (click)="editValue(rowFromTable.id, tempEditValue)">Submit</button>
