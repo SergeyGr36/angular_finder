@@ -18,7 +18,7 @@ const routes: Routes = [
 @NgModule({
   declarations: [
     AppComponent,
-    TableComponent
+    TableComponent,
   ],
   imports: [
     BrowserModule,

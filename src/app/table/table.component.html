@@ -1,6 +1,6 @@
 <div class="form-group">
-  <input type="text" name="inputLine" placeholder="Input anything" [(ngModel)]="inputLine">
-  <button type="button" class="btn btn-info" (click)="getDataBySearch()">Search</button>
+  <input type="text" name="inputLine" placeholder="Input anything" [(ngModel)]="inputLine" style="text-align: center">
+  <button type="button" class="btn btn-info" (click)="getDataBySearch(inputLine)">Search</button>
 </div>
 
 <!--*****************************************************************************-->
@@ -74,23 +74,20 @@
 <!--                                    version5-->
 
 
-<!-- Editable table -->
 <div class="card">
   <h3 class="card-header text-center font-weight-bold text-uppercase py-4">Month and other data for search</h3>
   <div class="card-body">
     <div id="table" class="table-editable">
-      <!--      <span class="table-add float-right mb-3 mr-2">-->
-      <!--        <a class="text-success" (click)="add()">-->
-      <!--          <mdb-icon fas icon="plus" size="2x"></mdb-icon>-->
-      <!--        </a>-->
-      <!--      </span>-->
       <table class="table table-bordered table-responsive-md table-striped text-center">
         <tr>
-          <th class="text-center">ID</th>
-          <th class="text-center">Value</th>
-          <th>
+          <th class="text-center" id="idHeader">ID</th>
+          <th class="text-center"id="valueHeader">Value</th>
+          <th id="valueCreateButton">
+            <input *ngIf="enableCreate" type="text" placeholder="create new record" style="text-align: center" [(ngModel)]="createLineRecord">
             <div class="form-group">
-              <button type="button" class="btn btn-info" (click)="createNewPosition(inputLine)">Create</button>
+              <button class="btn btn-primary btn-sm" *ngIf="enableCreate" (click)="createNewPosition(createLineRecord)">Submit</button>
+              <button class="btn btn-primary btn-sm" *ngIf="enableCreate" (click)="enableCreate=false">Cancel</button>
+              <button type="button" class="btn btn-info" *ngIf="!enableCreate" (click)="enableCreateMethod()">Create</button>
             </div>
           </th>
         </tr>
@@ -104,11 +101,11 @@
             <span class="table-remove" *ngIf="!enableEdit">
               <button *ngIf="enableDel && enableDelIndex == id" (click)="deletePosition($event, rowFromTable)">Submit</button>
               <button *ngIf="enableDel && enableDelIndex == id" (click)="enableDel=false">Cancel</button>
-              <button type="button" rounded="true" size="sm" class="my-0" class="table-row-action edit-action"
+              <button type="button" rounded="true" size="sm" class="my-0"
                       *ngIf="!enableDel" (click)="enableDelMethod($event, id)">Remove</button>
             </span>
             <span class="table-edit" *ngIf="!enableDel">
-              <button class="btn btn-primary btn-sm" *ngIf="enableEdit && enableEditIndex == id" (click)="editValue(rowFromTable.id, tempEditValue, $event)">Submit</button>
+              <button class="btn btn-primary btn-sm" *ngIf="enableEdit && enableEditIndex == id" (click)="editValue(rowFromTable.id, tempEditValue)">Submit</button>
               <button class="btn btn-secondary btn-sm" *ngIf="enableEdit && enableEditIndex == id" (click)="enableEdit=false">Cancel</button>
               <button type="button" mdbBtn color="danger" rounded="true" size="sm" class="my-0"
                       *ngIf="!enableEdit" (click)="enableEditMethod($event, id)">Edit</button>
@@ -118,4 +115,8 @@
     </div>
   </div>
 </div>
-<!-- Editable table -->
+
+
+<!--***************************************************************************************************************-->
+<!--                            version 6-->
+

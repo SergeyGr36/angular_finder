@@ -15,7 +15,7 @@ td{
   text-align: center;
 }
 .btn{
-  color: aqua;
+  color: black;
 }
 button{
   background-color: cadetblue;
@@ -27,4 +27,17 @@ button{
 #saveRef{
   background-color: green;
   color: aquamarine;
+}
+#idHeader{
+  resize: horizontal;
+  border: 1px solid;
+  overflow: auto;
+}
+#valueHeader{
+  resize: horizontal;
+  border: 1px solid;
+  overflow: auto;
+}
+#valueCreateButton{
+  min-width: 150px;
 }

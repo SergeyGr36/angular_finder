@@ -6,6 +6,7 @@ import {DataFromServer} from "./data.from.server";
 @Injectable({providedIn: 'root'})
 export class ConfigService {
   private url: string = 'http://localhost:8080/api/finder';
+
   constructor(private http: HttpClient) {
   }
 
@@ -14,17 +15,18 @@ export class ConfigService {
   }
 
   deleteData(dataFromRow: DataFromServer): Observable<boolean> {
-    const options={
+    const options = {
       body: dataFromRow
     }
     // @ts-ignore
     return this.http.delete<boolean>(this.url, options); //todo remove suppress warnings
   }
 
-  createData(input: string): Observable<DataFromServer>{
-    return this.http.post<DataFromServer>(this.url+"/create", input);
+  createData(input: string): Observable<DataFromServer> {
+    return this.http.post<DataFromServer>(this.url + "/create", input);
   }
-  updateData(value: DataFromServer): Observable<any>{
-    return this.http.put(this.url+"/edit", value)
+
+  updateData(value: DataFromServer): Observable<any> {
+    return this.http.put(this.url + "/edit", value)
   }
 }
