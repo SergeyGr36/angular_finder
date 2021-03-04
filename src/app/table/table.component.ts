@@ -39,8 +39,10 @@ export class TableComponent implements OnInit {
     });
   }
 
-  createNewPosition(input:string){
-    this.configService.createData(input).subscribe();
+  createNewPosition(){
+    this.configService.createData(this.createLineRecord).subscribe();
+    this.createLineRecord=null;
+    this.getDataBySearch("");
     this.enableCreate=false;
   }
 
@@ -78,7 +80,7 @@ export class TableComponent implements OnInit {
     this.enableDelIndex = i;
   }
 
-  tempValueForEdit(id: number, property: string, event: any){
+  tempValueForEdit(event: any){
     this.tempEditValue=event.target.textContent;
 }
 

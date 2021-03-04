@@ -85,7 +85,7 @@
           <th id="valueCreateButton">
             <input *ngIf="enableCreate" type="text" placeholder="create new record" style="text-align: center" [(ngModel)]="createLineRecord">
             <div class="form-group">
-              <button class="btn btn-primary btn-sm" *ngIf="enableCreate" (click)="createNewPosition(createLineRecord)">Submit</button>
+              <button class="btn btn-primary btn-sm" *ngIf="enableCreate" (click)="createNewPosition()">Submit</button>
               <button class="btn btn-primary btn-sm" *ngIf="enableCreate" (click)="enableCreate=false">Cancel</button>
               <button type="button" class="btn btn-info" *ngIf="!enableCreate" (click)="enableCreateMethod()">Create</button>
             </div>
@@ -96,7 +96,7 @@
             {{rowFromTable.id}}
           </th>
           <th class="allowEdit">
-            <span [attr.contenteditable]="enableEdit&&enableEditIndex==id" (keyup)="tempValueForEdit(id, value, $event)">{{rowFromTable.value}}</span>
+            <span [attr.contenteditable]="enableEdit&&enableEditIndex==id" (keyup)="tempValueForEdit($event)">{{rowFromTable.value}}</span>
           </th>
             <span class="table-remove" *ngIf="!enableEdit">
               <button *ngIf="enableDel && enableDelIndex == id" (click)="deletePosition($event, rowFromTable)">Submit</button>
